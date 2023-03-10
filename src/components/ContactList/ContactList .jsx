@@ -1,13 +1,17 @@
 import { List, Button } from './ContactList.styled';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContacts } from 'redux/contactsSlice';
+import { useEffect } from 'react';
+import { fetchContacts, deleteContact } from 'redux/operation';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
+  const { items: contacts, isLoading, error } = useSelector(getContacts);
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const getFilteredContacts = () => {
     const regExp = new RegExp(filter, 'gi');
@@ -17,22 +21,28 @@ export const ContactList = () => {
   const filteredContacts = getFilteredContacts();
 
   return (
-    <List>
-      {filteredContacts.map(({ name, id, number }) => {
-        return (
-          <li key={id}>
-            {name}: {number}
-            <Button
-              type="button"
-              onClick={() => {
-                dispatch(deleteContacts(id));
-              }}
-            >
-              Delete
-            </Button>
-          </li>
-        );
-      })}
-    </List>
+    <>
+      {isLoading && !error && <h2>Loading...</h2>}
+
+      {error && !isLoading && <h2>Oops, something went wrong ({error}) </h2>}
+      <List>
+        {filteredContacts.map(({ name, id, phone }) => {
+          return (
+            <li key={id}>
+              {name}: {phone}
+              <Button
+                type="button"
+                disabled={isLoading}
+                onClick={() => {
+                  dispatch(deleteContact(id));
+                }}
+              >
+                Delete
+              </Button>
+            </li>
+          );
+        })}
+      </List>
+    </>
   );
 };
