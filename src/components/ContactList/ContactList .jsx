@@ -34,7 +34,9 @@ export const ContactList = () => {
       {error && !isLoading && <h2>Oops, something went wrong ({error}) </h2>}
       {!error && (
         <List>
-          {contacts.length === 0 && <h3>here will be your contacts</h3>}
+          {contacts.length === 0 && !isLoading && (
+            <h3>here will be your contacts</h3>
+          )}
           {filter && filteredContacts.length === 0 && <h3>no matches found</h3>}
           {filteredContacts.map(({ name, id, phone }) => {
             return (
