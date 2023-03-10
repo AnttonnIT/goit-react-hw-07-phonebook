@@ -67,7 +67,7 @@ export const Form = () => {
         />
       </StyledLabel>
       <StyledLabel>
-        Number
+        Phone
         <input
           type="tel"
           name="phone"
