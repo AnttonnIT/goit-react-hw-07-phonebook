@@ -49,3 +49,27 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
+
+//  extraReducers: {
+//     [fetchContacts.pending]: handlePending,
+//     [fetchContacts.fulfilled](state, action) {
+//       handleFulfilled(state);
+//       state.items.push(...action.payload);
+//     },
+//     [fetchContacts.rejected]: handleRejected,
+//     [addContact.pending]: handlePending,
+//     [addContact.fulfilled](state, action) {
+//       handleFulfilled(state);
+//       state.items.push(action.payload);
+//     },
+//     [addContact.rejected]: handleRejected,
+//     [deleteContact.pending]: handlePending,
+//     [deleteContact.fulfilled](state, action) {
+//       handleFulfilled(state);
+//       const index = state.items.findIndex(
+//         item => item.id === action.payload.id
+//       );
+//       state.items.splice(index, 1);
+//     },
+//     [deleteContact.rejected]: handleRejected,
+//   },
