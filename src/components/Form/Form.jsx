@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { StyledForm, StyledLabel, StyledButton } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/operation';
 
